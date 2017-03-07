@@ -1,0 +1,15 @@
+*.pyc
+
+# Various directory index, temp file and editor's config
+*.DS_Store
+.*.swp
+
+# virtualenv
+/venv
+
+# project db
+*.sqlite3
+
+
+# Node.js
+/node_modules/
