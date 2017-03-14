@@ -19,8 +19,18 @@ class Track(AbstractDocument):
     date = models.DateTimeField(verbose_name=_('fecha realización'),
                                 auto_now_add=True)
 
+    admin_form_fields = (
+            'title',
+            'file',
+            'collection',
+            'tags'
+        )
+
+    def save(self, *args, **kwargs):
+        super(Track, self).save(*args, **kwargs)
+
 
 # Delete the source track file when a track is deleted
 @receiver(post_delete, sender=Track)
-def image_delete(sender, instance, **kwargs):
+def document_delete(sender, instance, **kwargs):
     instance.file.delete(False)

@@ -8,6 +8,7 @@ from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailcore.fields import RichTextField
 
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 
 from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
@@ -37,6 +38,10 @@ class BlogPage(Page):
     tags = ClusterTaggableManager(through=BlogPageTag, blank=True)
     category = models.ForeignKey('blog.BlogCategory', blank=True,
                                  on_delete=models.PROTECT)
+    track = models.ForeignKey('tracks.Track', on_delete=models.PROTECT,
+                              null=True, related_name='+')
+
+    content_panels = Page.content_panels + []
 
     def main_image(self):
         gallery_item = self.gallery_images.first()
@@ -55,6 +60,7 @@ class BlogPage(Page):
         ], heading="Blog information"),
         FieldPanel('intro'),
         FieldPanel('body', classname="full"),
+        DocumentChooserPanel('track'),
         InlinePanel('gallery_images', label="Gallery images"),
     ]
 
