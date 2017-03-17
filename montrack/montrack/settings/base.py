@@ -131,6 +131,8 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+TRACKS_ROOT = os.path.join(BASE_DIR, 'track_files')
+TRACKS_URL = '/track_files/'
 
 # Wagtail settings
 

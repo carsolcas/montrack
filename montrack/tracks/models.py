@@ -1,4 +1,6 @@
+from django.conf import settings
 from django.db import models
+from django.core.files.storage import FileSystemStorage
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
@@ -7,8 +9,13 @@ from wagtail.wagtaildocs.models import AbstractDocument
 
 import gpxpy
 
+track_fs = FileSystemStorage(location=settings.TRACKS_ROOT,
+                             base_url=settings.TRACKS_URL)
+
 
 class Track(AbstractDocument):
+    file = models.FileField(storage=track_fs, upload_to='',
+                            verbose_name=_('Track'))
     distance = models.IntegerField(_('distancia'), default=0)
     uphill = models.IntegerField(_('desnivel'), default=0)
     downhill = models.IntegerField(_('desnivel'), default=0)
