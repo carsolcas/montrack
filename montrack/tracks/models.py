@@ -4,12 +4,14 @@ from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 
 from wagtail.wagtaildocs.models import AbstractDocument
-# Create your models here.
+
+import gpxpy
 
 
 class Track(AbstractDocument):
     distance = models.IntegerField(_('distancia'), default=0)
-    elevation = models.IntegerField(_('desnivel'), default=0)
+    uphill = models.IntegerField(_('desnivel'), default=0)
+    downhill = models.IntegerField(_('desnivel'), default=0)
     moving_time = models.IntegerField(_('tiempo en movimiento'), default=0)
     elapsed_time = models.IntegerField(_('tiempo total'), default=0)
     max_elevation = models.IntegerField(_('altura máxima'), default=0)
@@ -27,7 +29,27 @@ class Track(AbstractDocument):
         )
 
     def save(self, *args, **kwargs):
+        read_file = self.pk is None
         super(Track, self).save(*args, **kwargs)
+
+        if read_file:
+            gpx = gpxpy.parse(open(self.file.path))
+
+            uphill, downhill = gpx.get_uphill_downhill()
+            (moving_time, stopped_time, moving_distance,
+             stopped_distance, max_speed) = gpx.get_moving_data()
+
+            start_time, end_time = gpx.get_time_bounds()
+
+            self.uphill = int(uphill)
+            self.downhill = int(downhill)
+            self.distance = int(gpx.length_3d())
+            self.max_velocity = max_speed
+            self.moving_time = int(moving_time)
+            self.elapsed_time = int(moving_time + stopped_time)
+            self.start_lat = gpx.tracks[0].segments[0].points[0].latitude
+            self.start_lon = gpx.tracks[0].segments[0].points[0].longitude
+            self.save()
 
 
 # Delete the source track file when a track is deleted
