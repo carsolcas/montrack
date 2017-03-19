@@ -14,6 +14,7 @@
 # Node.js
 /node_modules/
 /montrack/static/
+/montrack/montrack/static/
 /.sass-cache/
 /montrack/media/
 /montrack/track_files/
