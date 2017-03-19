@@ -1,5 +1,5 @@
 # Montrack
-Blog based on wagtail. Each blog entry has a related Track
+Django Blog project based on [wagtail](https://wagtail.io/) and [materialize](http://materializecss.com/) css framework. Each blog entry has a related Track
 
 Setup
 =======
@@ -10,7 +10,7 @@ It is a django project, so you need have installed python3. Apart from python yo
 * [Gulp](http://gulpjs.com/)
 * [Compass](http://compass-style.org/)
 * [Sass](http://sass-lang.com/)
-* [PIP](https://github.com/pypa/pip)
+
 
 ### Install
 Once you have all the dependencies installed, you can run the following commands:
