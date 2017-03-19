@@ -1,44 +1,105 @@
 {% load static wagtailuserbar %}
 
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>
-            {% block title %}
-                {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
-            {% endblock %}
-            {% block title_suffix %}
-                {% with self.get_site.site_name as site_name %}
-                    {% if site_name %}- {{ site_name }}{% endif %}
-                {% endwith %}
-            {% endblock %}
-        </title>
-        <meta name="description" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  <title>
+    {% block title %}
+      {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
+    {% endblock %}
+    {% block title_suffix %}
+      {% with self.get_site.site_name as site_name %}
+          {% if site_name %}- {{ site_name }}{% endif %}
+      {% endwith %}
+    {% endblock %}
+  </title>
 
-        {# Global stylesheets #}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/app.css' %}">
-
-        {% block extra_css %}
-            {# Override this in templates to add extra stylesheets #}
+  <!-- CSS  -->
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/app.css' %}">
+  {% block extra_css %}
+    {# Override this in templates to add extra stylesheets #}
+  {% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+  <!--Navigation-->
+  <div class="navbar-fixed">
+    <nav id="nav_f" class="default_color" role="navigation">
+      <div class="container">
+        <div class="nav-wrapper">
+          <a href="#" id="logo-container" class="brand-logo">Montrack</a>
+          <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+          <ul class="right hide-on-med-and-down">
+            <li><a href="#intro">Blog</a></li>
+            <li><a href="#work">Mapa</a></li>
+            <li><a href="#contact">Contacto</a></li>
+          </ul>
+          <ul id="nav-mobile" class="side-nav">
+            <li><a href="#intro">Blog</a></li>
+            <li><a href="#work">Mapa</a></li>
+            <li><a href="#contact">Contacto</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div  class="col s12">
+        {% block content %}
+          <h2 class="center header text_h2"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. <span class="span_h2"> Phasellus  </span>vestibulum lorem risus, nec suscipit lorem <span class="span_h2"> laoreet quis.</span> </h2>
         {% endblock %}
-    </head>
+      </div>
+    </div>
+  </div>
 
-    <body class="{% block body_class %}{% endblock %}">
-        {% wagtailuserbar %}
 
-        {% block content %}{% endblock %}
+  <!--Footer-->
+  <footer id="contact" class="page-footer default_color scrollspy">
+    <div class="container">
+        <div class="row">
+            <div class="col l9 s12">
+                <h5 class="white-text">Lorem ipsum</h5>
+                <ul>
+                    <li><a class="white-text" href="">Home</a></li>
+                    <li><a class="white-text" href="">Blog</a></li>
+                </ul>
+            </div>
+            <div class="col l3 s12">
+              <h5 class="white-text">Social</h5>
+              <ul>
+                <li>
+                  <a class="white-text" href="https://twitter.com/">
+                    <i class="small fa fa-behance-square white-text"></i> Twitter
+                  </a>
+                </li>
+                <li>
+                  <a class="white-text" href="https://www.facebook.com/">
+                    <i class="small fa fa-facebook-square white-text"></i> Facebook
+                  </a>
+                </li>
+              </ul>
+          </div>
+        </div>
+      </div>
+    <div class="footer-copyright default_color">
+      <div class="container">
+        Thanks to <a class="white-text" href="http://materializecss.com/">materializecss</a>
+      </div>
+    </div>
+  </footer>
 
-        {# Global javascript #}
-        <script type="text/javascript" src="{% static 'js/montrack.js' %}"></script>
+  {# Global javascript #}
+  <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/materialize.js' %}"></script>
+  <script>
+    $('.button-collapse').sideNav();
+  </script>
 
-        {% block extra_js %}
-            {# Override this in templates to add extra javascript #}
-        {% endblock %}
-    </body>
+  {% block extra_js %}
+      {# Override this in templates to add extra javascript #}
+  {% endblock %}
+  </body>
 </html>
