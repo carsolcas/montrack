@@ -27,6 +27,7 @@ class Track(AbstractDocument):
     start_lon = models.FloatField(_('longitud'), default=0)
     date = models.DateTimeField(verbose_name=_('fecha realización'),
                                 auto_now_add=True)
+    downloads = models.IntegerField(_('Descargas'), default=0)
 
     admin_form_fields = (
             'title',
