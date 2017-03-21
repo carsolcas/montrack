@@ -1,22 +1,31 @@
 var gulp = require('gulp');
 var compass = require('gulp-compass');
+const path = require('path');
+
+const PATHS = {
+  src_css: './css_src/*.scss',
+  src_jss: './js_src/*/*.jsx',
+  materialize: path.join(__dirname, 'node_modules/materialize-css'),
+  build: path.join(__dirname, 'montrack/montrack/static'),
+}
 
 gulp.task('compass', function() {
-  gulp.src('./css_src/*.scss')
+  gulp.src(PATHS.src_css)
     .pipe(compass({
-      css: 'montrack/montrack/static/css',
+      css: path.join(PATHS.build, 'css'),
       sass: 'css_src',
-      image: 'montrack/montrack/static/images',
-      javascript: 'montrack/montrack/static/js',
-      import_path: 'node_modules/materialize-css/sass'
+      image: path.join(PATHS.build, 'images'),
+      javascript: path.join(PATHS.build, 'js'),
+      import_path: path.join(PATHS.materialize, 'sass'),
     }))
-    .pipe(gulp.dest('montrack/montrack/static/css'));
+    .pipe(gulp.dest(path.join(PATHS.build, 'css')));
+});
+
+gulp.task('watch', function() {
+  gulp.watch(PATHS.src_css, ['compass']);
 });
 
 gulp.task('init_static', function() {
-  gulp.src('./node_modules/materialize-css/dist/fonts/roboto/Roboto*')
-    .pipe(gulp.dest('montrack/montrack/static/fonts/roboto'));
-
-  gulp.src('./node_modules/materialize-css/dist/js/*.js')
-    .pipe(gulp.dest('montrack/montrack/static/js'));
+  gulp.src(path.join(PATHS.build, 'dist/fonts/roboto/Roboto*'))
+    .pipe(gulp.dest(path.join(PATHS.build, 'fonts/roboto')));
 });
