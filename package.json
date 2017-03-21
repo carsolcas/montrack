@@ -24,6 +24,7 @@
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-compass": "^2.1.0",
+    "gulp-util": "^3.0.8",
     "hammerjs": "^2.0.8",
     "jquery": "^2.1.4",
     "materialize-css": "^0.98.0",

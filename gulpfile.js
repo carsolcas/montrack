@@ -1,10 +1,15 @@
 var gulp = require('gulp');
 var compass = require('gulp-compass');
+
+var webpack = require('webpack');
+var gutil = require("gulp-util");
+
 const path = require('path');
+const webpackConfig = require(path.join(__dirname,'webpack.config.js'));
 
 const PATHS = {
   src_css: './css_src/*.scss',
-  src_jss: './js_src/*/*.jsx',
+  src_js: './js_src/*.js',
   materialize: path.join(__dirname, 'node_modules/materialize-css'),
   build: path.join(__dirname, 'montrack/montrack/static'),
 }
@@ -21,8 +26,19 @@ gulp.task('compass', function() {
     .pipe(gulp.dest(path.join(PATHS.build, 'css')));
 });
 
+gulp.task('webpack', function(callback) {
+  webpack(webpackConfig,
+    function(err, stats) {
+        if(err) throw new gutil.PluginError("webpack", err);
+        gutil.log("[webpack]", stats.toString({
+        }));
+        callback();
+    });
+});
+
 gulp.task('watch', function() {
   gulp.watch(PATHS.src_css, ['compass']);
+  gulp.watch(PATHS.src_js, ['webpack']);
 });
 
 gulp.task('init_static', function() {
