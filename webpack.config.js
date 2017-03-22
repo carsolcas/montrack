@@ -8,9 +8,6 @@ const PATHS = {
 
 module.exports = {
   resolve: {
-    alias: {
-      'materialize': "materialize-css/dist/js/materialize.js"
-    }
   },
   plugins: [
     new webpack.ProvidePlugin({
