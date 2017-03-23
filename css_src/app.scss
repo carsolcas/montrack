@@ -1,6 +1,6 @@
 @import "materialize";
 @import "compass";
 
-p{
-  color: black;
+#sidenav-overlay{
+  z-index: 995;
 }
