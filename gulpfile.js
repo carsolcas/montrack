@@ -8,7 +8,7 @@ const path = require('path');
 const webpackConfig = require(path.join(__dirname,'webpack.config.js'));
 
 const PATHS = {
-  src_css: './css_src/*.scss',
+  src_css: './css_src/**/*.scss',
   src_js: './js_src/**/*.{js,jsx}',
   materialize: path.join(__dirname, 'node_modules/materialize-css'),
   build: path.join(__dirname, 'montrack/montrack/static'),
