@@ -5,13 +5,13 @@
 @import "components/mixins";
 @import "components/color";
 
-// Variables;
-@import "comp/variables";
+// Load custom set up for the site
+@import "components/site_config";
 
 // Reset
 @import "components/normalize";
 
-// components
+// materialize components
 @import "components/global";
 @import "components/badges";
 @import "components/icons-material-design";
@@ -41,7 +41,5 @@
 @import "components/date_picker/default.date";
 @import "components/date_picker/default.time";
 
-
-#sidenav-overlay{
-  z-index: 995;
-}
+// site components
+@import "components/site";
