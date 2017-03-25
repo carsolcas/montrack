@@ -3,7 +3,7 @@
   z-index: 995;
 }
 
-.grid-item { width: 60%; }
+.grid-item { width: 40%; }
 
 @media #{$small-masonry}{
   .grid-item {width: 100%; }
