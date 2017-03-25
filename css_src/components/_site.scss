@@ -1,0 +1,11 @@
+
+#sidenav-overlay{
+  z-index: 995;
+}
+
+.grid-item { width: 60%; }
+
+@media #{$small-masonry}{
+  .grid-item {width: 100%; }
+}
+.grid-item--width2 { width: 400px; }
