@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db import models
 
 from modelcluster.fields import ParentalKey
@@ -25,6 +26,34 @@ class BlogIndexPage(Page):
     ]
 
     subpage_types = ['blog.BlogPage']
+
+    @property
+    def entries(self):
+        entries = BlogPage.objects.live().descendant_of(self)
+        return entries.order_by('-date')
+
+    def get_context(self, request):
+        entries = self.entries
+
+        # Filter by tag
+        tag = request.GET.get('tag')
+        if tag:
+            entries = entries.filter(tags__name=tag)
+
+        # Pagination
+        page = request.GET.get('page')
+        paginator = Paginator(entries, 6)  # Show 10 blogs per page
+        try:
+            entries = paginator.page(page)
+        except PageNotAnInteger:
+            entries = paginator.page(1)
+        except EmptyPage:
+            entries = paginator.page(paginator.num_pages)
+
+        # Update template context
+        context = super(BlogIndexPage, self).get_context(request)
+        context['entries'] = entries
+        return context
 
 
 class BlogPageTag(TaggedItemBase):
