@@ -1,12 +1,25 @@
 {% extends "base.html" %}
 {% load wagtailcore_tags %}
 
-{% block body_class %}template-homepage{% endblock %}
+{% block body_class %}blog-index{% endblock %}
 
 {% block content %}
-    <h1>Welcome to your new Wagtail site!</h1>
+  <section class="parallax-container">
+    <div class="parallax">
+      <img src="https://joashpereira.com/templates/material_one_pager/img/parallax1.png" style="transform: translate3d(-50%, 153px, 0px); display: block;">
+    </div>
+  </section>
+  <div class="container">
+    <div class="row">
+      <div class="col s12">
+        <div class="grid">
+          {% include "blog/_entry_card.html" with entry=last_entry class_width="double" %}
 
-    <p>You can access the admin interface <a href="{% url 'wagtailadmin_home' %}">here</a> (make sure you have run "./manage.py createsuperuser" in the console first).</p>
-
-    <p>If you haven't already given the documentation a read, head over to <a href="http://docs.wagtail.io/">http://docs.wagtail.io</a> to start building on Wagtail</p>
+          {% for entry in entries %}
+            {% include "blog/_entry_card.html" with entry=entry %}
+          {% endfor %}
+        </div> <!-- Grid -->
+      </div>
+    </div>
+  </div>
 {% endblock %}
