@@ -34,6 +34,9 @@ class BlogIndexPage(Page):
 
     def get_context(self, request):
         entries = self.entries
+        last_entry = self.entries[0] if entries else None
+
+        entries = entries[1:]
 
         # Filter by tag
         tag = request.GET.get('tag')
@@ -53,6 +56,7 @@ class BlogIndexPage(Page):
         # Update template context
         context = super(BlogIndexPage, self).get_context(request)
         context['entries'] = entries
+        context['last_entry'] = last_entry
         return context
 
 
