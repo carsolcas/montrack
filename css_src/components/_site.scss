@@ -14,3 +14,15 @@
   .grid-item {width: 100%; }
 }
 .grid-item--width2 { width: 400px; }
+
+.blog-detail{
+  .author-container{
+    margin-top:1rem;
+  }
+
+  .blog-title{
+    background-color: rgba(grey, 0.5);
+    color: white;
+    text-align: center;
+  }
+}
