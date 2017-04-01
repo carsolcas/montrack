@@ -31,6 +31,17 @@
         {% if page.tags.all.count %}
         {% endif %}
         {{ page.body|richtext }}
+
+        <h3>Galería de Fotos</h3>
+        <div class="carousel">
+          {% for item in page.gallery_images.all %}
+
+            {% image item.image fill-800x800 as img %}
+            {% image item.image width-950 as img_full %}
+             <a class="carousel-item" href="{{img_full.url}}"> <img src="{{img.url}}" alt="{{ tmp_photo.alt }}"/></a>
+          {% endfor %}
+        </div>
+
         <div class="tags">
             {% for tag in page.tags.all %}
             <div class="chip small"><a href="{% slugurl 'tags' %}?tag={{ tag }}">{{ tag }}</a></div>
@@ -39,4 +50,8 @@
       </div>
     </div>
   </div>
+{% endblock %}
+
+{% block extra_js %}
+  <script type="text/javascript" src="{% static 'js/blog_detail.js' %}"></script>
 {% endblock %}

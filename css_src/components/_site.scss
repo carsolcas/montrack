@@ -28,4 +28,11 @@
     color: white;
     text-align: center;
   }
+  .carousel{
+    margin-bottom: 2rem;
+    .carousel-item {
+      width: 500px;
+      height: 500px;
+    }
+  }
 }

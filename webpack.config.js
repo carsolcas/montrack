@@ -18,6 +18,7 @@ module.exports = {
   ],
   entry: {
     home: path.join(PATHS.source, 'home.js'),
+    blog_detail: path.join(PATHS.source, 'blog_detail.js'),
   },
   output: {
     path: PATHS.build,
