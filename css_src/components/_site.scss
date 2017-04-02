@@ -4,7 +4,7 @@
 }
 
 .container{
-  max-width: 900px;
+  max-width: 1000px;
 }
 
 .grid-item {
@@ -23,6 +23,9 @@
     margin-top:1rem;
   }
 
+  .toc-wrapper{
+    margin-top: 5rem;
+  }
   .blog-title{
     background-color: rgba(grey, 0.5);
     color: white;
