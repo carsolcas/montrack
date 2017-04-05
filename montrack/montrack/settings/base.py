@@ -30,6 +30,9 @@ INSTALLED_APPS = [
     'search',
     'blog',
     'tracks',
+    'api',
+
+    'rest_framework',
 
     'wagtail.wagtailforms',
     'wagtail.wagtailredirects',
@@ -90,6 +93,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'montrack.wsgi.application'
 
+# Django rest framework
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
