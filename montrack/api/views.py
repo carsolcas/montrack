@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from rest_framework import generics
+from .serializers import TrackSerializer
+from tracks.models import Track
 
-# Create your views here.
+
+class RetrieveTrackView(generics.RetrieveAPIView):
+    queryset = Track.objects.all()
+    serializer_class = TrackSerializer

@@ -40,7 +40,7 @@ class Track(AbstractDocument):
         read_file = self.pk is None
         super(Track, self).save(*args, **kwargs)
 
-        if read_file:
+        if read_file and self.file:
             gpx = gpxpy.parse(open(self.file.path))
 
             uphill, downhill = gpx.get_uphill_downhill()
