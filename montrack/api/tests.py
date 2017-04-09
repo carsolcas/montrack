@@ -21,3 +21,4 @@ class TrackTestCase(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         data = response.json()
         self.assertEqual(data['id'], self.track.pk)
+        self.assertEqual(data['points'], [])

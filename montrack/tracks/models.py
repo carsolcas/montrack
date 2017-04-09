@@ -36,6 +36,11 @@ class Track(AbstractDocument):
             'tags'
         )
 
+    def get_points(self):
+        gpx = gpxpy.parse(open(self.file.path))
+        gpx.simplify(8)
+        return gpx.get_points_data()
+
     def save(self, *args, **kwargs):
         read_file = self.pk is None
         super(Track, self).save(*args, **kwargs)

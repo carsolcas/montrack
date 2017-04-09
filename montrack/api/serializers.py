@@ -3,6 +3,11 @@ from tracks.models import Track
 
 
 class TrackSerializer(serializers.ModelSerializer):
+    points = serializers.SerializerMethodField()
+
     class Meta:
         model = Track
-        fields = ('id', 'title')
+        fields = ('id', 'title', 'points')
+
+    def get_points(self, obj):
+        return obj.get_points()
