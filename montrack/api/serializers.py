@@ -7,7 +7,7 @@ class TrackSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Track
-        fields = ('id', 'title', 'points')
+        fields = ('id', 'title', 'max_elevation', 'distance', 'points')
 
     def get_points(self, obj):
         return obj.get_points()
