@@ -38,8 +38,11 @@ class Track(AbstractDocument):
 
     def get_points(self):
         gpx = gpxpy.parse(open(self.file.path))
-        gpx.simplify(8)
-        return gpx.get_points_data()
+        max_distance = 5
+        gpx.simplify(max_distance)
+        points = [(p.point.latitude, p.point.longitude, p.point.elevation,
+                   p.distance_from_start) for p in gpx.get_points_data()]
+        return points
 
     def save(self, *args, **kwargs):
         read_file = self.pk is None
