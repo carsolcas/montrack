@@ -28,10 +28,28 @@
         <p class="meta"></p>
         <div>
         </div>
+
         {% if page.intro%}
           <h4 id="introduction" class="section scrollspy">Introducción</h4>
           {{ page.intro|richtext }}
         {% endif %}
+
+        <h4 id="tech-data" class="section scrollspy">Datos de la Ruta</h4>
+        <table class="striped">
+          <tbody>
+            <tr>
+
+              <td>{{page.track.distance}} <abbr class="unit" title="kilometros">km.</abbr>
+                  {{page.track.uphill}} <abbr class="unit" title="metros">m.</abbr>
+                  {{page.track.max_elevation}} <abbr class="unit" title="metros">m.</abbr>
+                  {{page.track.moving_time}} <abbr class="unit" title="metros">m.</abbr>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
 
         <h4 id="description" class="section scrollspy">Descripción</h4>
         {{ page.body|richtext }}
@@ -59,6 +77,7 @@
         <div class="toc-wrapper pin-top">
           <ul class="section table-of-contents">
             <li><a href="#introduction">Introduction</a></li>
+            <li><a href="#tech-data">Datos de la Ruta</a></li>
             <li><a href="#description">Descripción</a></li>
             <li><a href="#gallery">Galería de fotos</a></li>
           </ul>
