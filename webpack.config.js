@@ -16,12 +16,20 @@ module.exports = {
       "window.jQuery": "jquery",
     })
   ],
+
   entry: {
     home: path.join(PATHS.source, 'home.js'),
     blog_detail: path.join(PATHS.source, 'blog_detail.js'),
   },
+
   output: {
     path: PATHS.build,
     filename: '[name].js',
+  },
+
+  module: {
+    loaders: [
+      { test: /\.jsx?$/, loader: 'babel-loader', exclude: /node_modules/ },
+    ]
   },
 };
