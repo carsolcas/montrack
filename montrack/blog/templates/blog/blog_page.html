@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static wagtailcore_tags wagtailimages_tags %}
+{% load static wagtailcore_tags wagtailimages_tags humanize montracktags %}
 
 {% block body_class %}blog-detail{% endblock %}
 
@@ -39,10 +39,10 @@
           <tbody>
             <tr>
 
-              <td>{{page.track.distance}} <abbr class="unit" title="kilometros">km.</abbr>
-                  {{page.track.uphill}} <abbr class="unit" title="metros">m.</abbr>
-                  {{page.track.max_elevation}} <abbr class="unit" title="metros">m.</abbr>
-                  {{page.track.moving_time}} <abbr class="unit" title="metros">m.</abbr>
+              <td>{{page.track.distance | humanize_km | floatformat:2}} <abbr class="unit" title="kilometros">km.</abbr>
+                  {{page.track.uphill | intcomma}} <abbr class="unit" title="metros">m.</abbr>
+                  {{page.track.max_elevation | intcomma}} <abbr class="unit" title="metros">m.</abbr>
+                  {{page.track.moving_time| humanize_time}}
               </td>
             </tr>
             <tr>
