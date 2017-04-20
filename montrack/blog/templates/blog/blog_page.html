@@ -39,10 +39,10 @@
           <tbody>
             <tr>
 
-              <td>{{page.track.distance | humanize_km | floatformat:2}} <abbr class="unit" title="kilometros">km.</abbr>
-                  {{page.track.uphill | intcomma}} <abbr class="unit" title="metros">m.</abbr>
-                  {{page.track.max_elevation | intcomma}} <abbr class="unit" title="metros">m.</abbr>
-                  {{page.track.moving_time| humanize_time}}
+              <td><i class="small material-icons">settings_ethernet</i>{{page.track.distance | humanize_km | floatformat:2}} <abbr class="unit" title="kilometros">km.</abbr>
+                  <i class="small material-icons">trending_up</i>{{page.track.uphill | intcomma}} <abbr class="unit" title="metros">m.</abbr>
+                  <i class="small material-icons">vertical_align_top</i>{{page.track.max_elevation | intcomma}} <abbr class="unit" title="metros">m.</abbr>
+                  <i class="small material-icons">history</i>{{page.track.moving_time| humanize_time}}
               </td>
             </tr>
             <tr>
