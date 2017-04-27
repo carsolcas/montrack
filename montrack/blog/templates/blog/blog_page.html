@@ -16,13 +16,30 @@
      <div class="row">
       <div class="col s12 m9 l10">
         <div class="row valign-wrapper author-container">
-          <div class="col s1">
+          <div class="col s4 m1">
             <img width="80px" src="{% static 'images/avatar.jpg' %}" alt="avatar" class="circle responsive-img">
           </div>
-          <div class="col s11">
+          <div class="col s8 m3">
             RyS<br/>
             {{ page.date }}
           </div>
+          <div class="col s12 m8 center hide-on-small-only">
+            <ul class="tack-data-preview">
+              <li><i class="small material-icons">settings_ethernet</i><span>{{page.track.distance | humanize_km | floatformat:2}}<abbr class="unit" title="kilometros">km.</abbr></span> </li>
+              <li><i class="small material-icons">trending_up</i><span>{{page.track.uphill | intcomma}} <abbr class="unit" title="metros">m.</abbr></span></li>
+              <li><i class="small material-icons">history</i><span>{{page.track.moving_time| humanize_time}}</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="row hide-on-med-and-up">
+          <div class="col s12 center">
+            <ul class="tack-data-preview">
+              <li><i class="small material-icons">settings_ethernet</i><span>{{page.track.distance | humanize_km | floatformat:2}}<abbr class="unit" title="kilometros">km.</abbr></span> </li>
+              <li><i class="small material-icons">trending_up</i><span>{{page.track.uphill | intcomma}} <abbr class="unit" title="metros">m.</abbr></span></li>
+              <li><i class="small material-icons">history</i><span>{{page.track.moving_time| humanize_time}}</span></li>
+            </ul>
+          </div>
+
         </div>
 
         <p class="meta"></p>
@@ -33,23 +50,6 @@
           <h4 id="introduction" class="section scrollspy">Introducción</h4>
           {{ page.intro|richtext }}
         {% endif %}
-
-        <h4 id="tech-data" class="section scrollspy">Datos de la Ruta</h4>
-        <table class="striped">
-          <tbody>
-            <tr>
-
-              <td><i class="small material-icons">settings_ethernet</i>{{page.track.distance | humanize_km | floatformat:2}} <abbr class="unit" title="kilometros">km.</abbr>
-                  <i class="small material-icons">trending_up</i>{{page.track.uphill | intcomma}} <abbr class="unit" title="metros">m.</abbr>
-                  <i class="small material-icons">vertical_align_top</i>{{page.track.max_elevation | intcomma}} <abbr class="unit" title="metros">m.</abbr>
-                  <i class="small material-icons">history</i>{{page.track.moving_time| humanize_time}}
-              </td>
-            </tr>
-            <tr>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
 
         <h4 id="description" class="section scrollspy">Descripción</h4>
         {{ page.body|richtext }}
@@ -77,7 +77,6 @@
         <div class="toc-wrapper pin-top">
           <ul class="section table-of-contents">
             <li><a href="#introduction">Introduction</a></li>
-            <li><a href="#tech-data">Datos de la Ruta</a></li>
             <li><a href="#description">Descripción</a></li>
             <li><a href="#gallery">Galería de fotos</a></li>
           </ul>

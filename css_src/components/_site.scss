@@ -39,3 +39,18 @@
     }
   }
 }
+
+.tack-data-preview{
+  li{
+    display: inline-block;
+    margin-right: 1rem;
+    i{
+      float: left;
+      margin-right: 5px;
+    }
+    span{
+      float: left;
+      line-height: 2rem;
+    }
+  }
+}
