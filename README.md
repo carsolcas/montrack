@@ -4,7 +4,7 @@ Django Blog project based on [wagtail](https://wagtail.io/) and [materialize](ht
 Setup
 =======
 ### Dependencies
-It is a django project, so you need have installed python3. Apart from python you need to have the following programs installed, in order you can compile js and css:
+It is a django project, so you need have installed python, i am using python3. Apart from python you need to have the following programs installed, in order you can compile js and css:
 * [Nodejs](https://nodejs.org/)
 * [npm](https://www.npmjs.com/)
 * [Gulp](http://gulpjs.com/)
@@ -26,6 +26,10 @@ Once you have all the dependencies installed, you can run the following commands
 You can compile the css files with the following command:
 
     $gulp compass
+
+Or watch for changes in css and js files with
+
+    $ gulp watch
 
 You can run the django web server:
 
