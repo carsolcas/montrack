@@ -24,20 +24,12 @@
             {{ page.date }}
           </div>
           <div class="col s12 m8 center hide-on-small-only">
-            <ul class="tack-data-preview">
-              <li><i class="small material-icons">settings_ethernet</i><span>{{page.track.distance | humanize_km | floatformat:2}}<abbr class="unit" title="kilometros">km.</abbr></span> </li>
-              <li><i class="small material-icons">trending_up</i><span>{{page.track.uphill | intcomma}} <abbr class="unit" title="metros">m.</abbr></span></li>
-              <li><i class="small material-icons">history</i><span>{{page.track.moving_time| humanize_time}}</span></li>
-            </ul>
+            {% include "blog/_summary_track_info.html"  with track=page.track %}
           </div>
         </div>
         <div class="row hide-on-med-and-up">
           <div class="col s12 center">
-            <ul class="tack-data-preview">
-              <li><i class="small material-icons">settings_ethernet</i><span>{{page.track.distance | humanize_km | floatformat:2}}<abbr class="unit" title="kilometros">km.</abbr></span> </li>
-              <li><i class="small material-icons">trending_up</i><span>{{page.track.uphill | intcomma}} <abbr class="unit" title="metros">m.</abbr></span></li>
-              <li><i class="small material-icons">history</i><span>{{page.track.moving_time| humanize_time}}</span></li>
-            </ul>
+            {% include "blog/_summary_track_info.html"  with track=page.track %}
           </div>
 
         </div>

@@ -1,0 +1,6 @@
+{% load humanize montracktags %}
+<ul class="tack-data-preview">
+    <li><i class="small material-icons">settings_ethernet</i><span>{{track.distance | humanize_km | floatformat:2}} <abbr class="unit" title="kilometros">km.</abbr></span> </li>
+    <li><i class="small material-icons">trending_up</i><span>{{track.uphill | intcomma}} <abbr class="unit" title="metros">m.</abbr></span></li>
+    <li><i class="small material-icons">history</i><span>{{track.moving_time| humanize_time}}</span></li>
+</ul>
