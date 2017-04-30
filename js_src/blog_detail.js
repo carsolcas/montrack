@@ -4,6 +4,7 @@ $('.button-collapse').sideNav();
 
 $('.carousel').carousel();
 $('.scrollspy').scrollSpy();
+$('.parallax').parallax();
 
 $(document).ready(function(){
     var topOffset;
