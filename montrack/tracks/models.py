@@ -38,7 +38,7 @@ class Track(AbstractDocument):
 
     def get_points(self):
         gpx = gpxpy.parse(open(self.file.path))
-        max_distance = 5
+        max_distance = 6
         gpx.simplify(max_distance)
         points = [(p.point.latitude, p.point.longitude, p.point.elevation,
                    p.distance_from_start) for p in gpx.get_points_data()]
@@ -56,6 +56,7 @@ class Track(AbstractDocument):
              stopped_distance, max_speed) = gpx.get_moving_data()
 
             start_time, end_time = gpx.get_time_bounds()
+            min_elevation, max_elevation = gpx.get_elevation_extremes()
 
             self.uphill = int(uphill)
             self.downhill = int(downhill)
@@ -65,6 +66,7 @@ class Track(AbstractDocument):
             self.elapsed_time = int(moving_time + stopped_time)
             self.start_lat = gpx.tracks[0].segments[0].points[0].latitude
             self.start_lon = gpx.tracks[0].segments[0].points[0].longitude
+            self.max_elevation = max_elevation
             self.save()
 
 
