@@ -43,6 +43,25 @@
           {{ page.intro|richtext }}
         {% endif %}
 
+        <h4 id="map-section" class="section scrollspy">Mapa</h4>
+        <div id="map" class="">
+          <div class="row">
+            <div class="col s12 center">
+              <div class="preloader-wrapper big active">
+                <div class="spinner-layer spinner-green-only">
+                  <div class="circle-clipper left">
+                    <div class="circle"></div>
+                  </div><div class="gap-patch">
+                    <div class="circle"></div>
+                  </div><div class="circle-clipper right">
+                    <div class="circle"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <h4 id="description" class="section scrollspy">Descripción</h4>
         {{ page.body|richtext }}
 
@@ -69,6 +88,7 @@
         <div class="toc-wrapper pin-top">
           <ul class="section table-of-contents">
             <li><a href="#introduction">Introduction</a></li>
+            <li><a href="#map-section">Mapa</a></li>
             <li><a href="#description">Descripción</a></li>
             <li><a href="#gallery">Galería de fotos</a></li>
           </ul>
