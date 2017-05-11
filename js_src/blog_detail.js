@@ -1,4 +1,7 @@
 import 'materialize-css';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Map from './components/Map';
 
 $('.button-collapse').sideNav();
 
@@ -13,3 +16,8 @@ $(document).ready(function(){
         top: topOffset,
     });
 });
+
+ReactDOM.render(
+  <Map />,
+  document.getElementById('map')
+);
