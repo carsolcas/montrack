@@ -1,7 +1,7 @@
 import 'materialize-css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Map from './components/Map';
+import DetailApp from './components/DetailApp';
 
 $('.button-collapse').sideNav();
 
@@ -18,6 +18,6 @@ $(document).ready(function(){
 });
 
 ReactDOM.render(
-  <Map />,
+  <DetailApp />,
   document.getElementById('map')
 );
