@@ -21,6 +21,7 @@ Once you have all the dependencies installed, you can run the following commands
     $source venv/bin/activate
     $pip install -r requirements.txt
     $npm install
+    $./montrack/manage.py migrate
 
 ### Util commands
 You can compile the css files with the following command:
