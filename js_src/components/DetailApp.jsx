@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Map from './Map';
 
 
@@ -16,7 +17,9 @@ class DetailApp extends Component {
 
   componentWillMount() {
     const that = this;
-    $.get('/api/track/13/', (data) => {
+    const url = `/api/track/${this.props.trackId}/`;
+
+    $.get(url, (data) => {
       const points = [];
       let minLat;
       let minLng;
@@ -48,5 +51,9 @@ class DetailApp extends Component {
     );
   }
 }
+
+DetailApp.propTypes = {
+  trackId: PropTypes.number.isRequired,
+};
 
 export default DetailApp;
