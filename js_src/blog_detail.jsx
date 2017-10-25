@@ -9,15 +9,11 @@ $('.carousel').carousel();
 $('.scrollspy').scrollSpy();
 $('.parallax').parallax();
 
-$(document).ready(function(){
-    var topOffset;
-    topOffset = $('nav').height() + $('.parallax-container').height();
-    $('.toc-wrapper').pushpin({
-        top: topOffset,
-    });
+$(document).ready(() => {
+  const topOffset = $('nav').height() + $('.parallax-container').height();
+  $('.toc-wrapper').pushpin({
+    top: topOffset,
+  });
 });
 
-ReactDOM.render(
-  <DetailApp />,
-  document.getElementById('map')
-);
+ReactDOM.render(<DetailApp trackId={13} />, document.getElementById('map'));
