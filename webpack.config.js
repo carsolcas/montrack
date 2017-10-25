@@ -1,4 +1,4 @@
-const webpack = require("webpack");
+const webpack = require('webpack');
 const path = require('path');
 
 const PATHS = {
@@ -12,15 +12,15 @@ module.exports = {
   },
   plugins: [
     new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery",
-      "window.jQuery": "jquery",
-    })
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery',
+    }),
   ],
 
   entry: {
     home: path.join(PATHS.source, 'home.js'),
-    blog_detail: path.join(PATHS.source, 'blog_detail.js'),
+    blog_detail: path.join(PATHS.source, 'blog_detail.jsx'),
   },
 
   output: {
@@ -31,6 +31,6 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.jsx?$/, loader: 'babel-loader', exclude: /node_modules/ },
-    ]
+    ],
   },
 };
