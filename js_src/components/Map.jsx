@@ -22,7 +22,7 @@ class MontrackMap extends Component {
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
           />
-          <Polyline positions={this.props.points} color="red" />
+          <Polyline positions={this.props.points} color="#8bc34a" />
         </Map>
       </div>
     );

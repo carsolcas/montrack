@@ -59,3 +59,21 @@
   height: 600px;
   width: 100%;
 }
+
+.elevation-chart-container{
+  width: 100%;
+  height: 200px;
+}
+.elevation-chart{
+  .xAxis text {
+    font-size: 8px;
+  }
+
+  .area{
+    fill: #8bc34a;
+    path {
+      stroke:#8bc34a;
+      stroke-width: 2;
+    }
+  }
+}
