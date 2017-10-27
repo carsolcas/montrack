@@ -103,5 +103,8 @@
 {% endblock %}
 
 {% block extra_js %}
+  <script>
+    let trackId = {{page.track.id}};
+  </script>
   <script type="text/javascript" src="{% static 'js/blog_detail.js' %}"></script>
 {% endblock %}

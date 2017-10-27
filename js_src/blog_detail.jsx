@@ -16,4 +16,4 @@ $(document).ready(() => {
   });
 });
 
-ReactDOM.render(<DetailApp trackId={13} />, document.getElementById('map'));
+ReactDOM.render(<DetailApp trackId={trackId} />, document.getElementById('map'));
