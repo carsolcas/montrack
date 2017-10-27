@@ -15,11 +15,32 @@ class ElevationChart extends Component {
     super(props);
     this.svgHeight = 0;
     this.svgWidth = 0;
+
+    this.onMoveInChart = this.onMoveInChart.bind(this);
+    this.onExitChart = this.onExitChart.bind(this);
   }
 
   componentDidMount() {
     this.svgWidth = this.containerChart.offsetWidth;
     this.svgHeight = this.containerChart.offsetHeight;
+  }
+
+
+  onMoveInChart(e) {
+    const { margin, onMouseMoveOnChart } = this.props;
+    const pos = this.getSvgCoords(e.clientX, e.clientY);
+    if (pos.x < margin.left || pos.x > this.svgWidth - margin.right) {
+      this.onExitChart();
+      return;
+    }
+
+    const km = this.xScale.invert(pos.x - margin.left);
+    onMouseMoveOnChart(km);
+  }
+
+  onExitChart() {
+    const { onMouseOutChart } = this.props;
+    onMouseOutChart();
   }
 
   getSvgCoords(x, y) {
@@ -29,16 +50,6 @@ class ElevationChart extends Component {
     pt.y = y;
     return pt.matrixTransform(svg.getScreenCTM().inverse());
   }
-
-  showToolTip(e, a, c) {
-    const { margin } = this.props;
-    const pos = this.getSvgCoords(e.clientX, e.clientY);
-    if (pos.x < margin.left || pos.x > this.svgWidth - margin.right) return;
-
-    const km = this.xScale.invert(pos.x - margin.left);
-    console.log(km);
-  }
-
   render() {
     const {
       data, selectX, selectY, margin,
@@ -87,7 +98,9 @@ class ElevationChart extends Component {
           width="100%"
           height="100%"
           className="elevation-chart"
-          onMouseMove={this.showToolTip.bind(this)}
+          onMouseMove={this.onMoveInChart}
+          onMouseOut={this.onExitChart}
+          onBlur={this.onExitChart}
         >
           <g height={height} className="chart-container" transform={translateContainer}>
             <g className="xAxis" transform={translateX} ref={node => d3Select(node).call(xAxis)} />
@@ -110,6 +123,8 @@ ElevationChart.propTypes = {
   selectX: PropTypes.func.isRequired,
   selectY: PropTypes.func.isRequired,
   margin: PropTypes.objectOf(PropTypes.number),
+  onMouseMoveOnChart: PropTypes.func.isRequired,
+  onMouseOutChart: PropTypes.func.isRequired,
 };
 
 ElevationChart.defaultProps = {

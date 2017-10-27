@@ -57,6 +57,8 @@ class DetailApp extends Component {
           data={this.state.elevations}
           selectX={selectX}
           selectY={selectY}
+          onMouseMoveOnChart={v => console.log(v)}
+          onMouseOutChart={() => console.log('Mouse out!!!')}
         />
       </div>
     );
