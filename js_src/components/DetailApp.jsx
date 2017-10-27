@@ -46,7 +46,7 @@ class DetailApp extends Component {
   }
 
   render() {
-    const selectX = item => item[1];
+    const selectX = item => item[1] / 1000;
     const selectY = item => item[0];
     return (
       <div>
