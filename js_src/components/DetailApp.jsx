@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import Map from './Map';
 import Chart from './ElevationChart';
 
+const selectY = item => item[0];
+const selectX = item => item[1] / 1000;
 
 class DetailApp extends Component {
   constructor(props) {
@@ -45,9 +47,34 @@ class DetailApp extends Component {
     });
   }
 
+  searchPoint(distance) {
+    const points = this.state.elevations;
+    let low = 0;
+    let high = points.length - 1;
+    let mid;
+
+    while (low <= high) {
+      mid = Math.floor((low + high) / 2);
+
+      if (points[mid].km === null) {
+        low += 1;
+      } else {
+        const point = parseFloat(selectX(points[mid]));
+
+        if (point > distance) high = mid - 1;
+        else if (point < distance) low = mid + 1;
+        else return points[mid]; // found
+      }
+    }
+    return points[mid]; // not found
+  }
+
   render() {
-    const selectX = item => item[1] / 1000;
-    const selectY = item => item[0];
+    const onMouseMoveOnChart = (d) => {
+      const point = this.searchPoint(d);
+      console.log(point[0], point[1]);
+    };
+
     return (
       <div>
         <Map points={this.state.points} bounds={this.state.bounds} />
@@ -57,7 +84,7 @@ class DetailApp extends Component {
           data={this.state.elevations}
           selectX={selectX}
           selectY={selectY}
-          onMouseMoveOnChart={v => console.log(v)}
+          onMouseMoveOnChart={onMouseMoveOnChart}
           onMouseOutChart={() => console.log('Mouse out!!!')}
         />
       </div>
