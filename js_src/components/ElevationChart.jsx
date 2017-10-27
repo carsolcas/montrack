@@ -18,8 +18,25 @@ class ElevationChart extends Component {
   }
 
   componentDidMount() {
-    this.svgWidth = this.svgChart.offsetWidth;
-    this.svgHeight = this.svgChart.offsetHeight;
+    this.svgWidth = this.containerChart.offsetWidth;
+    this.svgHeight = this.containerChart.offsetHeight;
+  }
+
+  getSvgCoords(x, y) {
+    const svg = this.svgChart;
+    const pt = svg.createSVGPoint();
+    pt.x = x;
+    pt.y = y;
+    return pt.matrixTransform(svg.getScreenCTM().inverse());
+  }
+
+  showToolTip(e, a, c) {
+    const { margin } = this.props;
+    const pos = this.getSvgCoords(e.clientX, e.clientY);
+    if (pos.x < margin.left || pos.x > this.svgWidth - margin.right) return;
+
+    const km = this.xScale.invert(pos.x - margin.left);
+    console.log(km);
   }
 
   render() {
@@ -31,14 +48,15 @@ class ElevationChart extends Component {
     const height = this.svgHeight - margin.top - margin.bottom;
 
 
-    const xScale = d3ScaleLinear()
+    this.xScale = d3ScaleLinear()
       .domain(d3ArrayExtent(data, selectX))
       .range([0, width]);
 
-    const yScale = d3ScaleLinear()
+    this.yScale = d3ScaleLinear()
       .domain(d3ArrayExtent(data, selectY))
       .range([height, 0]);
 
+    const { xScale, yScale } = this;
     const selectScaledX = datum => xScale(selectX(datum));
     const selectScaledY = datum => yScale(selectY(datum));
 
@@ -62,17 +80,21 @@ class ElevationChart extends Component {
     return (
       <div
         className="elevation-chart-container"
-        ref={(input) => { this.svgChart = input; }}
+        ref={(input) => { this.containerChart = input; }}
       >
         <svg
+          ref={(input) => { this.svgChart = input; }}
           width="100%"
           height="100%"
           className="elevation-chart"
+          onMouseMove={this.showToolTip.bind(this)}
         >
           <g height={height} className="chart-container" transform={translateContainer}>
             <g className="xAxis" transform={translateX} ref={node => d3Select(node).call(xAxis)} />
             <g className="yAxis" ref={node => d3Select(node).call(yAxis)} />
-            <g className="area">
+            <g
+              className="area"
+            >
               <path d={areaPath} />
             </g>
           </g>
