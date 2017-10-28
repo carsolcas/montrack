@@ -56,7 +56,7 @@ class DetailApp extends Component {
     while (low <= high) {
       mid = Math.floor((low + high) / 2);
 
-      if (points[mid].km === null) {
+      if (selectX(points[mid]) === null) {
         low += 1;
       } else {
         const point = parseFloat(selectX(points[mid]));
