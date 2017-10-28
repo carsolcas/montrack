@@ -25,7 +25,6 @@ class ElevationChart extends Component {
     this.svgHeight = this.containerChart.offsetHeight;
   }
 
-
   onMoveInChart(e) {
     const { margin, onMouseMoveOnChart } = this.props;
     const pos = this.getSvgCoords(e.clientX, e.clientY);
@@ -50,21 +49,23 @@ class ElevationChart extends Component {
     pt.y = y;
     return pt.matrixTransform(svg.getScreenCTM().inverse());
   }
+
   render() {
     const {
-      data, selectX, selectY, margin,
+      data, selectX, selectY, margin, selectedPoint,
     } = this.props;
 
     const width = this.svgWidth - margin.left - margin.right;
     const height = this.svgHeight - margin.top - margin.bottom;
 
+    const yDomain = d3ArrayExtent(data, selectY);
 
     this.xScale = d3ScaleLinear()
       .domain(d3ArrayExtent(data, selectX))
       .range([0, width]);
 
     this.yScale = d3ScaleLinear()
-      .domain(d3ArrayExtent(data, selectY))
+      .domain(yDomain)
       .range([height, 0]);
 
     const { xScale, yScale } = this;
@@ -88,6 +89,19 @@ class ElevationChart extends Component {
     const translateX = `translate(0, ${height})`;
     const translateContainer = `translate(${margin.left}, ${margin.top})`;
 
+    let verticalLine;
+    if (selectedPoint !== undefined) {
+      const line = d3Line()
+        .x(selectScaledX)
+        .y(selectScaledY);
+
+      const xPoint = selectX(data[selectedPoint]);
+      const linePoints = [[yDomain[0], xPoint], [yDomain[1], xPoint]];
+      const linePath = line(linePoints);
+      verticalLine = (<g className="vert-line"><path d={linePath} /></g>);
+    } else verticalLine = undefined;
+
+
     return (
       <div
         className="elevation-chart-container"
@@ -110,8 +124,8 @@ class ElevationChart extends Component {
             >
               <path d={areaPath} />
             </g>
+            {verticalLine}
           </g>
-
         </svg>
       </div>
     );
@@ -123,6 +137,7 @@ ElevationChart.propTypes = {
   selectX: PropTypes.func.isRequired,
   selectY: PropTypes.func.isRequired,
   margin: PropTypes.objectOf(PropTypes.number),
+  selectedPoint: PropTypes.number,
   onMouseMoveOnChart: PropTypes.func.isRequired,
   onMouseOutChart: PropTypes.func.isRequired,
 };
@@ -131,6 +146,7 @@ ElevationChart.defaultProps = {
   margin: {
     top: 20, right: 20, bottom: 30, left: 50,
   },
+  selectedPoint: undefined,
 };
 
 export default ElevationChart;

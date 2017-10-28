@@ -4,7 +4,7 @@ import Map from './Map';
 import Chart from './ElevationChart';
 
 const selectY = item => item[0];
-const selectX = item => item[1] / 1000;
+const selectX = item => item[1];
 
 class DetailApp extends Component {
   constructor(props) {
@@ -13,6 +13,7 @@ class DetailApp extends Component {
       points: [],
       elevations: [],
       bounds: [[0, 0], [0, 0]],
+      selectedPoint: undefined,
     };
   }
 
@@ -35,7 +36,9 @@ class DetailApp extends Component {
       }
       data.points.map((item) => {
         points.push([item[0], item[1]]);
-        elevations.push([item[2], item[3]]);
+        const dist = (item[3] / 1000).toFixed(2);
+        const elev = item[2].toFixed(0);
+        elevations.push([+elev, +dist]);
         minLat = Math.min(minLat, item[0]);
         minLng = Math.min(minLng, item[1]);
         maxLat = Math.max(maxLat, item[0]);
@@ -63,29 +66,34 @@ class DetailApp extends Component {
 
         if (point > distance) high = mid - 1;
         else if (point < distance) low = mid + 1;
-        else return points[mid]; // found
+        else return mid; // found
       }
     }
-    return points[mid]; // not found
+    return mid; // not found
   }
 
   render() {
     const onMouseMoveOnChart = (d) => {
       const point = this.searchPoint(d);
-      console.log(point[0], point[1]);
+      this.setState({ selectedPoint: point });
     };
+
+    const {
+      points, bounds, elevations, selectedPoint,
+    } = this.state;
 
     return (
       <div>
-        <Map points={this.state.points} bounds={this.state.bounds} />
+        <Map points={points} bounds={bounds} />
         <Chart
           height={300}
           width="100%"
-          data={this.state.elevations}
+          data={elevations}
           selectX={selectX}
           selectY={selectY}
+          selectedPoint={selectedPoint}
           onMouseMoveOnChart={onMouseMoveOnChart}
-          onMouseOutChart={() => console.log('Mouse out!!!')}
+          onMouseOutChart={() => this.setState({ selectedPoint: undefined })}
         />
       </div>
     );

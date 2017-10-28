@@ -1,4 +1,3 @@
-
 #sidenav-overlay{
   z-index: 995;
 }
@@ -64,6 +63,7 @@
   width: 100%;
   height: 200px;
 }
+
 .elevation-chart{
   .xAxis text {
     font-size: 8px;
@@ -73,6 +73,13 @@
     fill: #8bc34a;
     path {
       stroke:#8bc34a;
+      stroke-width: 2;
+    }
+  }
+
+  .vert-line{
+    path{
+      stroke: #999;
       stroke-width: 2;
     }
   }
