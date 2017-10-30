@@ -94,6 +94,8 @@ class ElevationChart extends Component {
         xPoint={xPoint}
         yPoint={yPoint}
         yDomain={yDomain}
+        yLabel="Alt."
+        xLabel="Dist."
       />);
 
     const areaPath = areaChart(data);
@@ -118,9 +120,7 @@ class ElevationChart extends Component {
           <g height={height} className="chart-container" transform={translateContainer}>
             <g className="xAxis" transform={translateX} ref={node => d3Select(node).call(xAxis)} />
             <g className="yAxis" ref={node => d3Select(node).call(yAxis)} />
-            <g
-              className="area"
-            >
+            <g className="area">
               <path d={areaPath} />
             </g>
             {tooltip}

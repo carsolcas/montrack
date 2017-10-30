@@ -77,10 +77,21 @@
     }
   }
 
+
+  $tooltip-stroke: #999;
   .vert-line{
     path{
-      stroke: #999;
+      stroke: $tooltip-stroke;
       stroke-width: 2;
+    }
+    rect{
+      stroke: $tooltip-stroke;
+    }
+    text{
+      font-size: 0.7rem;
+      tspan .value{
+        font-weight: bold;
+      }
     }
   }
 }
