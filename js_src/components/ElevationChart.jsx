@@ -8,6 +8,7 @@ import {
   axisLeft as d3AxisLeft,
 } from 'd3-axis';
 import { select as d3Select } from 'd3-selection';
+import ToolTip from './ToolTip';
 
 
 class ElevationChart extends Component {
@@ -84,23 +85,21 @@ class ElevationChart extends Component {
       .y0(height)
       .y1(selectScaledY);
 
+    const xPoint = (selectedPoint !== undefined) ? selectX(data[selectedPoint]) : undefined;
+    const yPoint = (selectedPoint !== undefined) ? selectY(data[selectedPoint]) : undefined;
+    const tooltip = (
+      <ToolTip
+        xScale={selectScaledX}
+        yScale={selectScaledY}
+        xPoint={xPoint}
+        yPoint={yPoint}
+        yDomain={yDomain}
+      />);
+
     const areaPath = areaChart(data);
 
     const translateX = `translate(0, ${height})`;
     const translateContainer = `translate(${margin.left}, ${margin.top})`;
-
-    let verticalLine;
-    if (selectedPoint !== undefined) {
-      const line = d3Line()
-        .x(selectScaledX)
-        .y(selectScaledY);
-
-      const xPoint = selectX(data[selectedPoint]);
-      const linePoints = [[yDomain[0], xPoint], [yDomain[1], xPoint]];
-      const linePath = line(linePoints);
-      verticalLine = (<g className="vert-line"><path d={linePath} /></g>);
-    } else verticalLine = undefined;
-
 
     return (
       <div
@@ -124,7 +123,7 @@ class ElevationChart extends Component {
             >
               <path d={areaPath} />
             </g>
-            {verticalLine}
+            {tooltip}
           </g>
         </svg>
       </div>
