@@ -96,6 +96,7 @@ class ElevationChart extends Component {
         yDomain={yDomain}
         yLabel="Alt."
         xLabel="Dist."
+        chartWidth={width}
       />);
 
     const areaPath = areaChart(data);
