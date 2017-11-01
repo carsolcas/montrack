@@ -84,7 +84,12 @@ class DetailApp extends Component {
 
     return (
       <div>
-        <Map points={points} bounds={bounds} />
+        <Map
+          points={points}
+          bounds={bounds}
+          selectedPoint={selectedPoint}
+        />
+
         <Chart
           height={300}
           width="100%"

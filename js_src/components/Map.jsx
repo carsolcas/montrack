@@ -11,6 +11,12 @@ class MontrackMap extends Component {
   }
 
   render() {
+    const { points, selectedPoint } = this.props;
+    let mark;
+    if (selectedPoint !== undefined) {
+      const point = points[selectedPoint];
+      mark = (<Marker position={point} />);
+    }
     return (
       <div>
         <Map
@@ -22,7 +28,8 @@ class MontrackMap extends Component {
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
           />
-          <Polyline positions={this.props.points} color="#8bc34a" />
+          <Polyline positions={points} color="#8bc34a" />
+          {mark}
         </Map>
       </div>
     );
@@ -32,6 +39,11 @@ class MontrackMap extends Component {
 MontrackMap.propTypes = {
   bounds: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
   points: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
+  selectedPoint: PropTypes.number,
+};
+
+MontrackMap.defaultProps = {
+  selectedPoint: undefined,
 };
 
 export default MontrackMap;
