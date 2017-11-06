@@ -14,63 +14,10 @@
       <div class="col s12">
         <h3>Últimas rutas</h3>
         <div class="grid">
-          <div class="card grid-item">
-          <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src="https://static.pexels.com/photos/1029/landscape-mountains-nature-clouds.jpg">
-          </div>
-          <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">Ruta por el Desierto de las Palmas <i class="material-icons right">more_vert</i></span>
-            <p><a href="#">Project link</a></p>
-          </div>
-          <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">Descripción <i class="material-icons right">close</i></span>
-            <p>{% lorem 1 b random%}</p>
-          </div>
-          </div>
-
-          <div class="card grid-item">
-          <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src="https://c1.staticflickr.com/6/5489/10138074145_ea1120799a_b.jpg">
-          </div>
-          <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">Ruta por el Desierto de las Palmas <i class="material-icons right">more_vert</i></span>
-            <p><a href="#">Project link</a></p>
-          </div>
-          <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">Descripción <i class="material-icons right">close</i></span>
-            <p>{% lorem 1 b random%}</p>
-          </div>
-          </div>
-
-          <div class="card grid-item">
-          <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src="https://static.pexels.com/photos/196464/pexels-photo-196464.jpeg">
-          </div>
-          <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">Ruta por el Desierto de las Palmas <i class="material-icons right">more_vert</i></span>
-            <p><a href="#">Project link</a></p>
-          </div>
-          <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">Descripción <i class="material-icons right">close</i></span>
-            <p>{% lorem 1 b random%}</p>
-          </div>
-          </div>
-
-          <div class="card grid-item">
-          <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src="https://static.pexels.com/photos/163407/cyclists-trail-bike-clouds-163407.jpeg">
-          </div>
-          <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">Ruta por el Desierto de las Palmas <i class="material-icons right">more_vert</i></span>
-            <p><a href="#">Project link</a></p>
-          </div>
-          <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">Descripción <i class="material-icons right">close</i></span>
-            <p>{% lorem 1 b random%}</p>
-          </div>
-          </div>
+          {% for entry in entries %}
+            {% include "blog/_entry_card.html" with entry=entry %}
+          {% endfor %}
         </div> <!-- Grid -->
-
       </div>
     </div>
   </div> <!--container-->

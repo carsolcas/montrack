@@ -13,4 +13,14 @@ class LinksMixin(object):
 
 
 class HomePage(LinksMixin, Page):
-    pass
+    num_entries = 4
+
+    def get_entries(self):
+        from blog.models import BlogPage
+        entries = BlogPage.objects.live().order_by('-date')
+        return entries[:self.num_entries]
+
+    def get_context(self, request):
+        context = super(HomePage, self).get_context(request)
+        context['entries'] = self.get_entries()
+        return context
