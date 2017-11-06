@@ -36,11 +36,11 @@
     "gulp": "^3.9.1",
     "gulp-compass": "^2.1.0",
     "gulp-util": "^3.0.8",
-    "masonry-layout": "^4.1.1",
     "react-transition-group": "^2.2.1",
     "webpack": "^2.2.1"
   },
   "dependencies": {
+    "masonry-layout": "^4.1.1",
     "d3-array": "^1.2.1",
     "d3-axis": "^1.0.8",
     "d3-scale": "^1.0.6",
