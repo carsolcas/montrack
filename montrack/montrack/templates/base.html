@@ -1,4 +1,4 @@
-{% load static wagtailuserbar %}
+{% load static wagtailuserbar wagtailcore_tags %}
 
 <!DOCTYPE html>
 <html>
@@ -29,17 +29,17 @@
     <nav id="nav_f" class="default_color" role="navigation">
       <div class="container">
         <div class="nav-wrapper">
-          <a href="#" id="logo-container" class="brand-logo">Montrack</a>
+          <a href="/" id="logo-container" class="brand-logo">Montrack</a>
           <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
           <ul class="right hide-on-med-and-down">
-            <li><a href="#intro">Blog</a></li>
-            <li><a href="#work">Mapa</a></li>
-            <li><a href="#contact">Contacto</a></li>
+            <li><a href="{% pageurl blog_index %}">Blog</a></li>
+            <li><a href="/mapa/">Mapa</a></li>
+            <li><a href="/contacto/">Contacto</a></li>
           </ul>
           <ul id="nav-mobile" class="side-nav">
-            <li><a href="#intro">Blog</a></li>
-            <li><a href="#work">Mapa</a></li>
-            <li><a href="#contact">Contacto</a></li>
+            <li><a href="{% pageurl blog_index %}">Blog</a></li>
+            <li><a href="/mapa/">Mapa</a></li>
+            <li><a href="/contacto/">Contacto</a></li>
           </ul>
         </div>
       </div>
@@ -56,8 +56,8 @@
         <div class="col l9 s12">
           <h5 class="white-text">Lorem ipsum</h5>
           <ul>
-            <li><a class="white-text" href="">Home</a></li>
-            <li><a class="white-text" href="">Blog</a></li>
+            <li><a class="white-text" href="/">Home</a></li>
+            <li><a class="white-text" href="{% pageurl blog_index %}">Blog</a></li>
           </ul>
         </div>
         <div class="col l3 s12">

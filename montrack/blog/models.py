@@ -17,8 +17,10 @@ from wagtail.wagtailadmin.edit_handlers import (FieldPanel, InlinePanel,
 
 from wagtail.wagtailsearch import index
 
+from home.models import LinksMixin
 
-class BlogIndexPage(Page):
+
+class BlogIndexPage(LinksMixin, Page):
     intro = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [
@@ -64,7 +66,7 @@ class BlogPageTag(TaggedItemBase):
     content_object = ParentalKey('BlogPage', related_name='tagged_items')
 
 
-class BlogPage(Page):
+class BlogPage(LinksMixin, Page):
     date = models.DateField("Post date")
     intro = RichTextField(blank=True)
     body = RichTextField(blank=True)
