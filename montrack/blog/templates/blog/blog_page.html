@@ -104,7 +104,8 @@
 
 {% block extra_js %}
   <script>
-    let trackId = {{page.track.id}};
+    const trackId = {{page.track.id}};
+    const icon = "{% static page.get_category_icon_url %}";
   </script>
   <script type="text/javascript" src="{% static 'js/blog_detail.js' %}"></script>
 {% endblock %}

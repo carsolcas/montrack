@@ -78,6 +78,9 @@ class BlogPage(LinksMixin, Page):
 
     content_panels = Page.content_panels + []
 
+    def get_category_icon_url(self):
+        return 'images/%s-icon.png' % self.category.name.lower()
+
     def main_image(self):
         gallery_item = self.gallery_images.first()
         return gallery_item.image if gallery_item else None

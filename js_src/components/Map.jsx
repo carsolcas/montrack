@@ -30,11 +30,11 @@ class MontrackMap extends Component {
   render() {
     const handleOnClick = ev => this.handleOnClick(ev);
 
-    const { points, selectedPoint } = this.props;
+    const { points, selectedPoint, categoryIcon } = this.props;
     let mark;
     if (selectedPoint !== undefined) {
       const point = points[selectedPoint];
-      const icon = new MontrackIcon({ iconUrl: '/static/images/mtb-icon.png' });
+      const icon = new MontrackIcon({ iconUrl: categoryIcon });
       mark = (<Marker position={point} icon={icon} />);
     }
 
@@ -66,6 +66,7 @@ MontrackMap.propTypes = {
   points: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)).isRequired,
   onSelectedPointChange: PropTypes.func.isRequired,
   selectedPoint: PropTypes.number,
+  categoryIcon: PropTypes.string.isRequired,
 };
 
 MontrackMap.defaultProps = {

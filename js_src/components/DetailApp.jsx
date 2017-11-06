@@ -64,6 +64,7 @@ class DetailApp extends Component {
           bounds={bounds}
           selectedPoint={selectedPoint}
           onSelectedPointChange={handleSelectedPointChange}
+          categoryIcon={this.props.icon}
         />
 
         <Chart
@@ -82,6 +83,7 @@ class DetailApp extends Component {
 
 DetailApp.propTypes = {
   trackId: PropTypes.number.isRequired,
+  icon: PropTypes.string.isRequired,
 };
 
 export default DetailApp;
