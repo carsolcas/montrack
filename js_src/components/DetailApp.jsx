@@ -50,7 +50,6 @@ class DetailApp extends Component {
     });
   }
 
-
   render() {
     const {
       points, bounds, elevations, selectedPoint,
@@ -64,6 +63,7 @@ class DetailApp extends Component {
           points={points}
           bounds={bounds}
           selectedPoint={selectedPoint}
+          onSelectedPointChange={handleSelectedPointChange}
         />
 
         <Chart
