@@ -50,37 +50,13 @@ class DetailApp extends Component {
     });
   }
 
-  searchPoint(distance) {
-    const points = this.state.elevations;
-    let low = 0;
-    let high = points.length - 1;
-    let mid;
-
-    while (low <= high) {
-      mid = Math.floor((low + high) / 2);
-
-      if (selectX(points[mid]) === null) {
-        low += 1;
-      } else {
-        const point = parseFloat(selectX(points[mid]));
-
-        if (point > distance) high = mid - 1;
-        else if (point < distance) low = mid + 1;
-        else return mid; // found
-      }
-    }
-    return mid; // not found
-  }
 
   render() {
-    const onMouseMoveOnChart = (d) => {
-      const point = this.searchPoint(d);
-      this.setState({ selectedPoint: point });
-    };
-
     const {
       points, bounds, elevations, selectedPoint,
     } = this.state;
+
+    const handleSelectedPointChange = p => this.setState({ selectedPoint: p });
 
     return (
       <div>
@@ -97,8 +73,7 @@ class DetailApp extends Component {
           selectX={selectX}
           selectY={selectY}
           selectedPoint={selectedPoint}
-          onMouseMoveOnChart={onMouseMoveOnChart}
-          onMouseOutChart={() => this.setState({ selectedPoint: undefined })}
+          onSelectedPointChange={handleSelectedPointChange}
         />
       </div>
     );

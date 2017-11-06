@@ -27,20 +27,22 @@ class ElevationChart extends Component {
   }
 
   onMoveInChart(e) {
-    const { margin, onMouseMoveOnChart } = this.props;
+    const { margin, onSelectedPointChange } = this.props;
     const pos = this.getSvgCoords(e.clientX, e.clientY);
+
     if (pos.x < margin.left || pos.x > this.svgWidth - margin.right) {
       this.onExitChart();
       return;
     }
 
     const km = this.xScale.invert(pos.x - margin.left);
-    onMouseMoveOnChart(km);
+    const pointIndex = this.searchPoint(km);
+    onSelectedPointChange(pointIndex);
   }
 
   onExitChart() {
-    const { onMouseOutChart } = this.props;
-    onMouseOutChart();
+    const { onSelectedPointChange } = this.props;
+    onSelectedPointChange(undefined);
   }
 
   getSvgCoords(x, y) {
@@ -50,6 +52,29 @@ class ElevationChart extends Component {
     pt.y = y;
     return pt.matrixTransform(svg.getScreenCTM().inverse());
   }
+
+  searchPoint(distance) {
+    const { selectX, data } = this.props;
+    let low = 0;
+    let high = data.length - 1;
+    let mid;
+
+    while (low <= high) {
+      mid = Math.floor((low + high) / 2);
+
+      if (selectX(data[mid]) === null) {
+        low += 1;
+      } else {
+        const point = parseFloat(selectX(data[mid]));
+
+        if (point > distance) high = mid - 1;
+        else if (point < distance) low = mid + 1;
+        else return mid; // found
+      }
+    }
+    return mid; // not found
+  }
+
 
   render() {
     const {
@@ -138,8 +163,7 @@ ElevationChart.propTypes = {
   selectY: PropTypes.func.isRequired,
   margin: PropTypes.objectOf(PropTypes.number),
   selectedPoint: PropTypes.number,
-  onMouseMoveOnChart: PropTypes.func.isRequired,
-  onMouseOutChart: PropTypes.func.isRequired,
+  onSelectedPointChange: PropTypes.func.isRequired,
 };
 
 ElevationChart.defaultProps = {
