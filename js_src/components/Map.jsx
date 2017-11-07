@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Map, TileLayer, Marker, Polyline } from 'react-leaflet';
+import { Map, TileLayer, Polyline } from 'react-leaflet';
 import MontrackIcon from './Icon';
+import MontrackMarker from './Marker';
 
 const zoomLevel = 12;
 
@@ -31,12 +32,8 @@ class MontrackMap extends Component {
     const handleOnClick = ev => this.handleOnClick(ev);
 
     const { points, selectedPoint, categoryIcon } = this.props;
-    let mark;
-    if (selectedPoint !== undefined) {
-      const point = points[selectedPoint];
-      const icon = new MontrackIcon({ iconUrl: categoryIcon });
-      mark = (<Marker position={point} icon={icon} />);
-    }
+    const point = (selectedPoint !== undefined) ? points[selectedPoint] : null;
+    const mark = (<MontrackMarker point={point} iconURL={categoryIcon} />);
 
     return (
       <div>
