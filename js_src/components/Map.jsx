@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Map, TileLayer, Polyline } from 'react-leaflet';
-import MontrackIcon from './Icon';
 import MontrackMarker from './Marker';
 
 const zoomLevel = 12;
