@@ -1,5 +1,7 @@
 from unittest.mock import patch
 
+from datetime import datetime
+
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 
@@ -7,6 +9,7 @@ from rest_framework.test import APIClient
 from rest_framework import status
 
 from tracks.models import Track
+from blog.models import BlogPage, BlogCategory
 
 
 class TrackTestCase(TestCase):
@@ -29,3 +32,16 @@ class TrackTestCase(TestCase):
         data = response.json()
         self.assertEqual(data['id'], self.track.pk)
         self.assertEqual(data['points'], points)
+
+
+class TrackListTestCase(TestCase):
+    def setUp(self):
+        self.client = APIClient()
+
+    def test_get_tracklist(self):
+        url = reverse('track_list')
+        response = self.client.get(url, format="json")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        data = response.json()
+
+        self.assertEqual(len(data), 0)
