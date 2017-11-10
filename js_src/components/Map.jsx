@@ -6,10 +6,20 @@ import MontrackMarker from './Marker';
 const zoomLevel = 12;
 
 class MontrackMap extends Component {
-  componentDidUpdate() {
-    const leafletMap = this.leafletMap.leafletElement;
-    leafletMap.fitBounds(this.props.bounds);
+  constructor(props) {
+    super(props);
+
+    this.zoomUpdated = false;
+    this.bounded = false;
     this.handleOnClick = this.handleOnClick.bind(this);
+  }
+
+  componentDidUpdate() {
+    if (!this.zoomUpdated) {
+      const leafletMap = this.leafletMap.leafletElement;
+      leafletMap.fitBounds(this.props.bounds);
+      this.bounded = true;
+    }
   }
 
   handleOnClick(ev) {
@@ -29,6 +39,10 @@ class MontrackMap extends Component {
 
   render() {
     const handleOnClick = ev => this.handleOnClick(ev);
+    const handleOnZoom = () => {
+      if (this.bounded) this.zoomUpdated = true;
+      return true;
+    };
 
     const { points, selectedPoint, categoryIcon } = this.props;
     const point = (selectedPoint !== undefined) ? points[selectedPoint] : null;
@@ -38,6 +52,8 @@ class MontrackMap extends Component {
       <div>
         <Map
           ref={(m) => { this.leafletMap = m; }}
+          onZoom={handleOnZoom}
+          onZoomlevelschange={handleOnZoom}
           zoom={zoomLevel}
         >
           <TileLayer
