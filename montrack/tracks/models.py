@@ -5,7 +5,7 @@ from django.db.models.signals import post_delete
 from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 
-from wagtail.wagtaildocs.models import AbstractDocument
+from wagtail.documents.models import AbstractDocument
 
 import gpxpy
 

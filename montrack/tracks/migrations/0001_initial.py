@@ -6,8 +6,8 @@ from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
 import taggit.managers
-import wagtail.wagtailcore.models
-import wagtail.wagtailsearch.index
+import wagtail.core.models
+import wagtail.search.index
 
 
 class Migration(migrations.Migration):
@@ -37,7 +37,7 @@ class Migration(migrations.Migration):
                 ('start_lat', models.FloatField(default=0, verbose_name='latitud')),
                 ('start_lon', models.FloatField(default=0, verbose_name='longitud')),
                 ('date', models.DateTimeField(auto_now_add=True, verbose_name='fecha realización')),
-                ('collection', models.ForeignKey(default=wagtail.wagtailcore.models.get_root_collection_id, on_delete=django.db.models.deletion.CASCADE, related_name='+', to='wagtailcore.Collection', verbose_name='collection')),
+                ('collection', models.ForeignKey(default=wagtail.core.models.get_root_collection_id, on_delete=django.db.models.deletion.CASCADE, related_name='+', to='wagtailcore.Collection', verbose_name='collection')),
                 ('tags', taggit.managers.TaggableManager(blank=True, help_text=None, through='taggit.TaggedItem', to='taggit.Tag', verbose_name='tags')),
                 ('uploaded_by_user', models.ForeignKey(blank=True, editable=False, null=True, on_delete=django.db.models.deletion.SET_NULL, to=settings.AUTH_USER_MODEL, verbose_name='uploaded by user')),
             ],
@@ -45,6 +45,6 @@ class Migration(migrations.Migration):
                 'abstract': False,
                 'verbose_name': 'document',
             },
-            bases=(wagtail.wagtailsearch.index.Indexed, models.Model),
+            bases=(wagtail.search.index.Indexed, models.Model),
         ),
     ]
